@@ -1,0 +1,14 @@
+[project]
+name = "mc-speedrun-rl"
+version = "0.1.0"
+description = "Minecraft Speedrun RL Environment for HUD hackathon"
+requires-python = ">=3.11"
+dependencies = [
+    "hud-python>=0.6.0",
+    "fastmcp>=3.0.0",
+    "requests>=2.31.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

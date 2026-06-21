@@ -1,0 +1,42 @@
+FROM python:3.11-slim
+
+# Install system deps: Java 21 (for Minecraft server), Node.js (for Mineflayer bot), curl
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    ca-certificates \
+    gnupg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Java 21
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    openjdk-17-jre-headless \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Node.js 22
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Python deps
+COPY pyproject.toml ./
+RUN pip install uv && uv sync --frozen --no-dev 2>/dev/null || pip install hud-python fastmcp requests
+
+# Node deps — Mineflayer bot
+COPY package.json package-lock.json ./
+RUN npm ci --production
+
+# Minecraft server
+COPY server/server.jar server/server.jar
+COPY server/eula.txt server/eula.txt
+COPY server/server.properties server/server.properties
+COPY server/ops.json server/ops.json
+
+# Bot and environment code
+COPY bot.js .
+COPY env.py .
+COPY tasks.py .
+
+EXPOSE 8765
+CMD ["uv", "run", "hud", "serve", "env:env", "--host", "0.0.0.0", "--port", "8765"]

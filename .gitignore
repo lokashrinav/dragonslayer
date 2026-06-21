@@ -1,0 +1,15 @@
+node_modules/
+__pycache__/
+*.pyc
+server/speedrun_world/
+server/server.jar
+server/logs/
+server/*.json
+server/eula.txt
+server/server.properties
+recordings/
+checkpoints/
+trajectories/
+.imgfind_output/
+*.mp4
+*.webm

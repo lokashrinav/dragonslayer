@@ -1,0 +1,32 @@
+{
+  "tasks": [
+    {
+      "id": "speedrun_easy",
+      "variants": [
+        {"objective": "get_wood"},
+        {"objective": "craft_planks"},
+        {"objective": "craft_crafting_table"},
+        {"objective": "craft_wooden_pickaxe"}
+      ]
+    },
+    {
+      "id": "speedrun_medium",
+      "variants": [
+        {"objective": "get_cobblestone"},
+        {"objective": "craft_stone_pickaxe"},
+        {"objective": "craft_iron_pickaxe"}
+      ]
+    },
+    {
+      "id": "speedrun_hard",
+      "variants": [
+        {"objective": "get_diamonds"},
+        {"objective": "enter_nether"}
+      ]
+    },
+    {
+      "id": "speedrun_full",
+      "variants": [{}]
+    }
+  ]
+}
